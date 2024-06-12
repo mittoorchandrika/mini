@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salary</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .salary-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            border: 1px solid white;
+            border-radius: 10px;
+            background-color: #333;
+            width: 300px;
+        }
+        .salary-box label,
+        .salary-box input,
+        .salary-box button {
+            margin: 5px 0;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid white;
+            border-radius: 10px;
+            background-color: #444;
+            display: none;
+            width: 300px;
+        }
+        .buttons {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .buttons a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid white;
+            border-radius: 5px;
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Salary </h1>
+    <div class="salary-box">
+        <label for="employee-id">Employee ID:</label>
+        <input type="text" id="employee-id" name="employee-id">
+        
+        <label for="working-days">Working Days:</label>
+        <input type="text" id="working-days" name="working-days">
+        
+        <button type="button" onclick="calculateSalary()">Submit</button>
+    </div>
+    <div id="result-box" class="result-box">
+        <p id="result-id"></p>
+        <p id="result-days"></p>
+        <p id="result-daily-salary"></p>
+        <p id="result-total-salary"></p>
+    </div>
+    <div class="buttons">
+        <a href="index.html">Back</a>
+    </div>
+    <script>
+        function calculateSalary() {
+            const employeeId = document.getElementById('employee-id').value;
+            const workingDays = document.getElementById('working-days').value;
+            const dailySalary = 100; // Example daily salary
+            const totalSalary = dailySalary * workingDays;
+
+            document.getElementById('result-id').innerText = Employee ID: ${employeeId};
+            document.getElementById('result-days').innerText = Working Days: ${workingDays};
+            document.getElementById('result-daily-salary').innerText = Daily Salary: $${dailySalary};
+            document.getElementById('result-total-salary').innerText = Total Salary: $${totalSalary};
+
+            document.getElementById('result-box').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

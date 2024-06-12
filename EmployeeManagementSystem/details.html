@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="images/home-logo.png" alt="Home Logo" class="home-logo">
+        <h1>Employee Details</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <label for="search-employee-id">Enter Employee ID:</label>
+            <input type="text" id="search-employee-id" name="search-employee-id" required>
+            <button type="button" onclick="searchEmployee()">Fetch Data</button>
+
+            <div id="employee-details">
+                <!-- Employee details will be displayed here -->
+            </div>
+            <button type="button" onclick="navigateTo('index.html')">Back</button>
+        </div>
+    </main>
+    <footer>
+        <img src="images/google-logo.png" alt="Google Logo" class="google-logo">
+        <p>Google</p>
+    </footer>
+    <script>
+        function searchEmployee() {
+            var employeeId = document.getElementById('search-employee-id').value;
+            var employeeDetails = JSON.parse(localStorage.getItem('employee_' + employeeId));
+
+            var detailsContainer = document.getElementById('employee-details');
+
+            if (employeeDetails) {
+                detailsContainer.innerHTML = `
+                    <h2>Employee Details</h2>
+                    <p><strong>ID:</strong> ${employeeDetails.id}</p>
+                    <p><strong>Name:</strong> ${employeeDetails.name}</p>
+                    <p><strong>Age:</strong> ${employeeDetails.age}</p>
+                    <p><strong>Gender:</strong> ${employeeDetails.gender}</p>
+                    <p><strong>Position:</strong> ${employeeDetails.position}</p>
+                    <p><strong>Contact:</strong> ${employeeDetails.contact}</p>
+                    <p><strong>Email:</strong> ${employeeDetails.email}</p>
+                `;
+            } else {
+                detailsContainer.innerHTML = '<p>Employee not found.</p>';
+            }
+        }
+
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

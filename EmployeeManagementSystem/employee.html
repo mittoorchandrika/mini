@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="images/home-logo.png" alt="Home Logo" class="home-logo">
+        <h1>Employee Details</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <form id="employee-form">
+                <label for="employee-id">Employee ID</label>
+                <input type="text" id="employee-id" name="employee-id" required>
+
+                <label for="employee-name">Employee Name</label>
+                <input type="text" id="employee-name" name="employee-name" required>
+
+                <label for="employee-age">Employee Age</label>
+                <input type="number" id="employee-age" name="employee-age" required>
+
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="others">Others</option>+
+                </select>
+
+                <label for="position">Position</label>
+                <input type="text" id="position" name="position" required>
+
+                <label for="contact">Contact</label>
+                <input type="text" id="contact" name="contact" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <div class="form-buttons">
+                    <button type="button" onclick="addEmployee()">Add</button>
+                    <button type="button" onclick="navigateTo('index.html')">Back</button>
+                </div>
+            </form>
+            <div id="employee-table">
+                <!-- Employee table will be displayed here -->
+            </div>
+        </div>
+    </main>
+    <footer>
+        <img src="images/google-logo.png" alt="Google Logo" class="google-logo">
+        <p>Google</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayEmployeeTable();
+        });
+
+        function addEmployee() {
+            // Get form data
+            var employeeId = document.getElementById('employee-id').value;
+            var employeeName = document.getElementById('employee-name').value;
+            var employeeAge = document.getElementById('employee-age').value;
+            var gender = document.getElementById('gender').value;
+            var position = document.getElementById('position').value;
+            var contact = document.getElementById('contact').value;
+            var email = document.getElementById('email').value;
+
+            // Store employee details in local storage
+            var employeeDetails = {
+                id: employeeId,
+                name: employeeName,
+                age: employeeAge,
+                gender: gender,
+                position: position,
+                contact: contact,
+                email: email
+            };
+
+            localStorage.setItem('employee_' + employeeId, JSON.stringify(employeeDetails));
+            displayEmployeeTable();
+            document.getElementById('employee-form').reset();
+        }
+
+        function displayEmployeeTable() {
+            var tableContainer = document.getElementById('employee-table');
+            tableContainer.innerHTML = '';
+
+            var table = document.createElement('table');
+            var headerRow = table.insertRow(0);
+            headerRow.innerHTML = '<th>ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Position</th><th>Contact</th><th>Email</th>';
+
+            Object.keys(localStorage).forEach(function(key) {
+                if (key.startsWith('employee_')) {
+                    var employeeDetails = JSON.parse(localStorage.getItem(key));
+                    var row = table.insertRow();
+                    row.innerHTML = <td>${employeeDetails.id}</td><td>${employeeDetails.name}</td><td>${employeeDetails.age}</td><td>${employeeDetails.gender}</td><td>${employeeDetails.position}</td><td>${employeeDetails.contact}</td><td>${employeeDetails.email}</td>;
+                }
+            });
+
+            tableContainer.appendChild(table);
+        }
+
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
